@@ -1,0 +1,28 @@
+@import '~tailwindcss/base';
+@import '~tailwindcss/components';
+@import '~tailwindcss/utilities';
+
+html,
+#app,
+body {
+  height: 100%;
+  margin: 0;
+}
+button:disabled,
+div:disabled,
+input:disabled,
+select:disabled {
+  background-color: #ccc;
+  color: black;
+  opacity: 30% !important;
+  pointer-events: none;
+  cursor: default;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  background-color: #ccc;
+  color: black;
+  opacity: 30% !important;
+}

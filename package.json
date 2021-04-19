@@ -1,0 +1,58 @@
+{
+  "name": "vue-social-auth",
+  "version": "0.1.2",
+  "private": false,
+  "files": [
+    "dist/*",
+    "types/*"
+  ],
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "serve": "vue-cli-service serve --https true",
+    "build": "vue-cli-service build",
+    "build-lib": "vue-cli-service build --target lib src/main.ts && npm pack",
+    "push": "cp package.json ./dist/package.json && npm publish ./dist --access public",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.3.2",
+    "@types/gapi": "^0.0.39",
+    "@vee-validate/rules": "^4.1.20",
+    "@zhuowenli/vue-feather-icons": "^5.0.2",
+    "core-js": "^3.6.5",
+    "fb-sdk-wrapper": "^1.1.0",
+    "googleapis": "^71.0.0",
+    "lodash": "^4.17.21",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vee-validate": "^4.3.0",
+    "vue": "^3.0.0",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/lodash": "^4.14.168",
+    "@types/mocha": "^5.2.4",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-mocha": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/test-utils": "^2.0.0-0",
+    "autoprefixer": "9",
+    "chai": "^4.1.2",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.0.0",
+    "postcss": "7",
+    "prettier": "^2.2.1",
+    "sass": "^1.32.8",
+    "sass-loader": "10.1.1",
+    "typescript": "~4.1.5"
+  }
+}
