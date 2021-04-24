@@ -22,10 +22,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "src/config/FaceBookAuth.js",
-    "src/config/FaceBookAuth.js",
-    "src/config/GoogleAuth.js"
+    "tests/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }
