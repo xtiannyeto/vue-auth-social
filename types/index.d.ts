@@ -1,9 +1,8 @@
-import { Component } from 'vue';
-
 declare module 'vue-social-auth' {
-  export const Auth: Component;
-  export const GoogleAuth: Component;
-  export const FacebookAuth: Component;
-  export const SignIn: Component;
-  export const SignUp: Component;
+  import type { DefineComponent } from 'vue';
+  export const Auth: DefineComponent;
+  export const GoogleAuth: DefineComponent;
+  export const FacebookAuth: DefineComponent;
+  export const SignIn: DefineComponent;
+  export const SignUp: DefineComponent;
 }
