@@ -1,15 +1,27 @@
 <template>
   <div id="app" class="h-full static">
     <div class="main-container">
+      <button @click="closeAuth">CLOSE</button>
+      <FacebookAuth :appId="'258641021230701'" @on-submit="facebook">
+        Facebook
+      </FacebookAuth>
+      <GoogleAuth
+        :clientId="'852582397994-fhm8gqu5dqoatgvgvarb5fa694sgpcdd'"
+        @on-submit="google"
+      >
+        Google
+      </GoogleAuth>
       <Auth
-        :color="'blue'"
+        ref="authRef"
+        :logo="'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'"
+        :color="'green'"
         :userPassword="true"
-        :facebookAppId="'258641021230701'"
-        :googleClientId="'852582397994-fhm8gqu5dqoatgvgvarb5fa694sgpcdd'"
-        @on-google-submit="google"
-        @on-facebook-submit="facebook"
-        @on-signin-submit="signin"
-        @on-signup-submit="signup"
+        :facebookAppId="facebookAppId"
+        :googleClientId="googleClientId"
+        @on-google="google"
+        @on-facebook="facebook"
+        @on-signin="signin"
+        @on-signup="signup"
       >
         Login
       </Auth>
@@ -18,13 +30,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import Auth from '@/components/Auth.vue';
+import FacebookAuth from '@/components/FacebookAuth.vue';
+import GoogleAuth from '@/components/GoogleAuth.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    Auth
+    Auth,
+    FacebookAuth,
+    GoogleAuth
+  },
+  setup() {
+    const authRef: any = ref(null);
+    const facebookAppId = '';
+    const googleClientId = '';
+
+    function closeAuth() {
+      setTimeout(() => {
+        console.log('call');
+        authRef.value?.close();
+      }, 5000);
+    }
+    return { authRef, closeAuth, facebookAppId, googleClientId };
   },
   methods: {
     google(response: any) {

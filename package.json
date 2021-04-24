@@ -1,16 +1,24 @@
 {
   "name": "vue-social-auth",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "private": false,
   "files": [
     "dist/*",
     "types/*"
   ],
   "types": "./types/index.d.ts",
+  "main": "./dist/vue-social-auth.umd.js",
+  "module": "./dist/vue-social-auth.common.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-social-auth.common.js",
+      "require": "./dist/vue-social-auth.umd.js"
+    }
+  },
   "scripts": {
     "serve": "vue-cli-service serve --https true",
     "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib src/main.ts && npm pack",
+    "build-lib": "vue-cli-service build --target lib src/index.ts && npm pack",
     "push": "cp package.json ./dist/package.json && npm publish ./dist --access public",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
