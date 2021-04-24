@@ -1,10 +1,12 @@
 <template>
   <form>
-    <div class="my-4">
-      <BaseInput
+    <div class="my-2">
+      <BaseAuthInput
+        :color="color"
         :disabled="!enabled"
         :type="'email'"
-        :id="'signIn-email'"
+        :id="'signin-email'"
+        :placeHolder="'E.g thomas.blondy@social.com'"
         v-model="email.value.value"
         label="Email address"
       />
@@ -13,11 +15,13 @@
       }}</span>
     </div>
 
-    <div class="my-4">
-      <BaseInput
+    <div class="my-2">
+      <BaseAuthInput
+        :color="color"
         :disabled="!enabled"
         :type="'password'"
-        :id="'signIn-password'"
+        :id="'current-password'"
+        :placeHolder="'Xyz@#%$!'"
         v-model="password.value.value"
         label="Password"
       />
@@ -28,18 +32,21 @@
     <div class="py-2 relative cursor-pointer">
       <a
         @click="$emit('is-login')"
-        class="absolute right-2 font-medium text-indigo-600 hover:text-indigo-500"
+        :class="mainColor"
+        class="absolute right-2 font-medium"
       >
-        I dont have an account yet?
+        I dont have an account yet
       </a>
     </div>
-    <div class="mt-8">
-      <BaseButton
+    <div class="mt-6">
+      <BaseAuthButton
+        :color="color"
         @click.prevent="submitForm"
         class="w-full"
         :disabled="!isFormValid"
-        >Sign in</BaseButton
       >
+        <span class="text-lg ml-4">Sign in</span>
+      </BaseAuthButton>
     </div>
   </form>
 </template>
@@ -47,6 +54,8 @@
 import { computed, defineComponent } from 'vue';
 import { defineRule, useField, useForm } from 'vee-validate';
 import { required, email, min, confirmed } from '@vee-validate/rules';
+import BaseAuthButton from '@/components/BaseAuthButton.vue';
+import BaseAuthInput from '@/components/BaseAuthInput.vue';
 
 defineRule('required', required);
 defineRule('email', email);
@@ -55,12 +64,16 @@ defineRule('confirmed', confirmed);
 
 export default defineComponent({
   name: 'SignIn',
-  components: {},
+  components: {
+    BaseAuthButton,
+    BaseAuthInput
+  },
   props: {
     enabled: {
       type: Boolean,
       default: true
-    }
+    },
+    color: String
   },
   setup(props, { emit }) {
     const form = useForm();
@@ -68,7 +81,6 @@ export default defineComponent({
     const password = useField<string>('password', 'required');
     const isFormValid = computed(() => form.meta.value.valid);
     function submitForm() {
-      console.log(form.values);
       emit('on-submit', form.values);
     }
     return {
@@ -78,6 +90,11 @@ export default defineComponent({
       isFormValid,
       submitForm
     };
+  },
+  computed: {
+    mainColor(): string {
+      return `text-${this.color}-600 hover:text-${this.color}-500`;
+    }
   }
 });
 </script>

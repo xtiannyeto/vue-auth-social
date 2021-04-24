@@ -1,21 +1,17 @@
 <template>
-  <span
-    :class="mainColor"
-    class="font-medium cursor-pointer"
-    @click="openModal = !openModal"
-  >
+  <span class="font-medium cursor-pointer" @click="openModal = !openModal">
     <slot></slot>
   </span>
 
-  <BaseModal
+  <BaseAuthModal
     v-if="openModal"
     :status="'infos'"
     :icon="false"
     @close="openModal = false"
   >
-    <div>
-      <img class="mx-auto h-12 w-auto" :src="logo" />
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+    <div class="mb-6">
+      <img v-if="logo" class="mx-auto h-12 w-auto" :src="logo" />
+      <h2 class="mt-6 mb-2 text-center text-3xl font-extrabold text-gray-900">
         <span v-if="isLogin">Sign in your account</span>
         <span v-else>Create an account</span>
       </h2>
@@ -23,11 +19,17 @@
     <div class="px-6">
       <div v-if="userPassword">
         <SignIn
+          :color="color"
           v-if="isLogin"
           @is-login="isLogin = false"
-          @on-submit="responseSignIn"
+          @on-submit="$emit('on-signin', $event)"
         />
-        <SignUp v-else @is-login="isLogin = true" @on-submit="responseSignUp" />
+        <SignUp
+          :color="color"
+          v-else
+          @is-login="isLogin = true"
+          @on-submit="$emit('on-signup', $event)"
+        />
       </div>
       <div class="grid grid-cols-1 space-y-4 mt-6 mb-6">
         <div v-if="or" class="login-choice">
@@ -37,7 +39,7 @@
         <FacebookAuth
           v-if="facebookAppId"
           :appId="facebookAppId"
-          @on-submit="responseFacebook"
+          @on-submit="$emit('on-facebook', $event)"
         >
           <FacebookButton @click="openModal = true" />
         </FacebookAuth>
@@ -51,13 +53,13 @@
         <GoogleAuth
           v-if="googleClientId"
           :clientId="googleClientId"
-          @on-submit="responseGoogle"
+          @on-submit="$emit('on-google', $event)"
         >
           <GoogleButton @click="openModal = true" />
         </GoogleAuth>
       </div>
     </div>
-  </BaseModal>
+  </BaseAuthModal>
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
@@ -69,6 +71,7 @@ import GithubButton from '@/components/GithubButton.vue';
 import GoogleButton from '@/components/GoogleButton.vue';
 import SignIn from '@/components/SignIn.vue';
 import SignUp from '@/components/SignUp.vue';
+import BaseAuthModal from '@/components/BaseAuthModal.vue';
 
 export default defineComponent({
   name: 'Auth',
@@ -80,22 +83,21 @@ export default defineComponent({
     GithubButton,
     GoogleButton,
     SignIn,
-    SignUp
+    SignUp,
+    BaseAuthModal
   },
   props: {
     color: {
       type: String,
       default: 'indigo'
     },
-    logo: {
-      type: String,
-      default: 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
-    },
+    logo: String,
     facebookAppId: String,
     googleClientId: String,
     userPassword: Boolean
   },
-  setup(props, { emit }) {
+  emits: ['on-google', 'on-facebook', 'on-signin', 'on-signup'],
+  setup(props) {
     const openModal = ref(false);
     const isLogin = ref(true);
 
@@ -103,39 +105,16 @@ export default defineComponent({
       () => props.userPassword && (props.facebookAppId || props.googleClientId)
     );
 
-    function responseGoogle(response: any) {
-      emit('on-google-submit', response);
-    }
-
-    function responseFacebook(response: any) {
-      emit('on-facebook-submit', response);
-    }
-
-    function responseSignIn(response: any) {
-      emit('on-signin-submit', response);
-    }
-
-    function responseSignUp(response: any) {
-      emit('on-signup-submit', response);
-    }
+    const close = (): void => {
+      openModal.value = false;
+    };
 
     return {
       openModal,
       isLogin,
       or,
-      responseGoogle,
-      responseFacebook,
-      responseSignIn,
-      responseSignUp
+      close
     };
-  },
-  computed: {
-    mainColor(): string {
-      return `text-${this.color}-700 hover:text-${this.color}-500`;
-    },
-    textColor(): string {
-      return `text-${this.color}-700`;
-    }
   }
 });
 </script>

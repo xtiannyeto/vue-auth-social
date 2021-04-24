@@ -1,5 +1,5 @@
 <template>
-  <BaseButton class="w-full" :color="'white'">
+  <BaseAuthButton class="w-full" :color="'white'">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="18"
@@ -12,5 +12,15 @@
       />
     </svg>
     <span class="text-gray-700 text-lg ml-4"> Continue with Facebook</span>
-  </BaseButton>
+  </BaseAuthButton>
 </template>
+<script>
+import { defineComponent } from 'vue/';
+import BaseAuthButton from '@/components/BaseAuthButton.vue';
+
+export default defineComponent({
+  components: {
+    BaseAuthButton
+  }
+});
+</script>

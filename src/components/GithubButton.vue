@@ -1,5 +1,5 @@
 <template>
-  <BaseButton class="w-full" :color="'white'" @click="signInGithub">
+  <BaseAuthButton class="w-full" :color="'white'" @click="signInGithub">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -11,5 +11,15 @@
       />
     </svg>
     <span class="text-gray-700 text-lg ml-4"> Continue with Github</span>
-  </BaseButton>
+  </BaseAuthButton>
 </template>
+<script>
+import { defineComponent } from 'vue/';
+import BaseAuthButton from '@/components/BaseAuthButton.vue';
+
+export default defineComponent({
+  components: {
+    BaseAuthButton
+  }
+});
+</script>

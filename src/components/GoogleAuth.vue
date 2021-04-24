@@ -13,6 +13,7 @@ export default defineComponent({
   props: {
     clientId: String
   },
+  emits: ['on-submit'],
   setup(props, { emit }) {
     let gAuth: any = null;
     const error = ref('');
@@ -23,11 +24,14 @@ export default defineComponent({
       gAuth
         .signIn()
         .then((googleUser: any) => {
-          emit('on-submit', googleUser);
-          console.log('GoogleUser', googleUser);
-          console.log('getId', googleUser.getId());
-          console.log('getBasicProfile', googleUser.getBasicProfile());
-          console.log('getAuthResponse', googleUser.getAuthResponse());
+          const user = {
+            id: googleUser?.getBasicProfile()?.getId(),
+            email: googleUser?.getBasicProfile()?.getEmail(),
+            name: googleUser?.getBasicProfile()?.getName(),
+            picture: googleUser?.getBasicProfile()?.getImageUrl(),
+            googleUser: googleUser
+          };
+          emit('on-submit', user);
         })
         .catch((e: any) => {
           error.value = 'something went wrong...';

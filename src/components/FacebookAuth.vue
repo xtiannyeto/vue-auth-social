@@ -12,6 +12,7 @@ export default defineComponent({
   props: {
     appId: String
   },
+  emits: ['on-submit'],
   setup(props, { emit }) {
     async function signIn() {
       const response = await login();
