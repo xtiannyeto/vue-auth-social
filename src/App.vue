@@ -2,13 +2,10 @@
   <div id="app" class="h-full static">
     <div class="main-container">
       <button @click="closeAuth">CLOSE</button>
-      <FacebookAuth :appId="'258641021230701'" @on-submit="facebook">
+      <FacebookAuth :appId="facebookAppId" @on-submit="facebook">
         Facebook
       </FacebookAuth>
-      <GoogleAuth
-        :clientId="'852582397994-fhm8gqu5dqoatgvgvarb5fa694sgpcdd'"
-        @on-submit="google"
-      >
+      <GoogleAuth :clientId="googleClientId" @on-submit="google">
         Google
       </GoogleAuth>
       <Auth
