@@ -11,6 +11,19 @@ yarn add @xtiannyeto/vue-auth-social
 npm install @xtiannyeto/vue-auth-social
 ```
 
+in your main css or scss file
+```scss
+@import '~vue-auth-social/dist/vue-auth-social.css';
+```
+
+Using Auth Modal you need tailwind 
+in your main css or scss file
+```scss
+@import '~tailwindcss/base';
+@import '~tailwindcss/components';
+@import '~tailwindcss/utilities';
+```
+
 ## Usage
 
 ### Facebook Auth
