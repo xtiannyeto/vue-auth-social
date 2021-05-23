@@ -1,25 +1,26 @@
 {
-  "name": "vue-social-auth",
-  "version": "0.1.0",
+  "name": "vue-auth-social",
+  "version": "0.1.4",
   "private": false,
   "files": [
     "dist/*",
     "types/*"
   ],
   "types": "./types/index.d.ts",
-  "main": "./dist/vue-social-auth.umd.js",
-  "module": "./dist/vue-social-auth.common.js",
+  "main": "./dist/vue-auth-social.umd.js",
+  "module": "./dist/vue-auth-social.common.js",
   "exports": {
     ".": {
-      "import": "./dist/vue-social-auth.common.js",
-      "require": "./dist/vue-social-auth.umd.js"
+      "import": "./dist/vue-auth-social.common.js",
+      "require": "./dist/vue-auth-social.umd.js"
     }
   },
   "scripts": {
     "serve": "vue-cli-service serve --https true",
     "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib src/index.ts && npm pack",
-    "push": "cp package.json ./dist/package.json && npm publish ./dist --access public",
+    "build-lib": "vue-cli-service build --target lib src/index.ts",
+    "build-lib-pack": "vue-cli-service build --target lib src/index.ts && npm pack",
+    "push": "npm publish --access public",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
@@ -54,6 +55,7 @@
     "@vue/test-utils": "^2.0.0-0",
     "autoprefixer": "9",
     "chai": "^4.1.2",
+    "dotenv": "^10.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",

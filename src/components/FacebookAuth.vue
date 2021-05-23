@@ -1,5 +1,5 @@
 <template>
-  <span @click="signIn">
+  <span class="cursor-pointer" @click="signIn">
     <slot></slot>
   </span>
 </template>

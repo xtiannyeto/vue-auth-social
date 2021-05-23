@@ -41,8 +41,9 @@ export default defineComponent({
   },
   setup() {
     const authRef: any = ref(null);
-    const facebookAppId = '';
-    const googleClientId = '';
+    const facebookAppId = process.env.VUE_APP_FACEBOOK_APP_ID;
+    const googleClientId = process.env.VUE_APP_GOOGLE_CLIENT_ID;
+    console.log(facebookAppId);
 
     function closeAuth() {
       setTimeout(() => {
