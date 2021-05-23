@@ -151,6 +151,23 @@ signUp(event: any) {
 .....
 ```
 
+### Close Auth Modal
+
+```html
+ <Auth ref="authRef"
+     Login
+ </Auth>
+<button @click="closeAuth">Close</button>
+```
+```typescript
+setup() {
+    const authRef: any = ref(null);
+    function closeAuth() {
+      authRef.value?.close();
+    }
+    return { authRef, closeAuth, ...};
+  }
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
