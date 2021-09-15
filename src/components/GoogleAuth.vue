@@ -1,7 +1,6 @@
 <template>
   <span class="cursor-pointer" @click="signIn">
     <slot></slot>
-    {{ error }}
   </span>
 </template>
 <script lang="ts">
@@ -16,10 +15,8 @@ export default defineComponent({
   emits: ['on-submit'],
   setup(props, { emit }) {
     let gAuth: any = null;
-    const error = ref('');
 
     function signIn() {
-      error.value = '';
       if (!gAuth) return;
       gAuth
         .signIn()
@@ -34,8 +31,8 @@ export default defineComponent({
           emit('on-submit', user);
         })
         .catch((e: any) => {
-          error.value = 'something went wrong...';
           console.log('error', e);
+          emit('on-submit', e);
         });
     }
 
@@ -52,7 +49,7 @@ export default defineComponent({
       gAuth = await installGoogleAuth(options);
     });
 
-    return { signIn, error, signOut };
+    return { signIn, signOut };
   }
 });
 </script>
