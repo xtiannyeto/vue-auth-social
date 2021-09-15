@@ -1,8 +1,9 @@
 <template>
   <div id="app" class="h-full static flex flex-col">
     <div class="w-full h-2/5">
-      <div class="text-right font-bold text-md px-12 py-4">
-        <a :href="githubLink">Github</a>
+      <div class="flex flex-row justify-end font-bold text-md px-12 py-4">
+        <a class="mx-4" :href="npmLink">npm</a>
+        <a class="mx-4" :href="githubLink">Github</a>
       </div>
       <h1 class="mt-32 text-center text-9xl font-bold leading-7 text-gray-900">
         Vue Auth Social
@@ -62,6 +63,7 @@ export default defineComponent({
     const authRef: any = ref(null);
     const response: any = ref(null);
     const githubLink = 'https://github.com/xtiannyeto/vue-auth-social';
+    const npmLink = 'https://www.npmjs.com/package/@xtiannyeto/vue-auth-social';
     const facebookAppId = process.env.VUE_APP_FACEBOOK_APP_ID;
     const googleClientId = process.env.VUE_APP_GOOGLE_CLIENT_ID;
 
@@ -82,7 +84,8 @@ export default defineComponent({
       facebookAppId,
       googleClientId,
       handleResponse,
-      githubLink
+      githubLink,
+      npmLink
     };
   }
 });
