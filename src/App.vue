@@ -50,7 +50,7 @@
       </div>
     </div>
     <div
-      class="bg-gray-100 h-2/5 my-4 dark:bg-gray-700 dark:text-white px-4 py-4"
+      class="bg-gray-100 h-2/5 my-4 dark:bg-gray-700 dark:text-white px-4 py-4 mx-4"
     >
       <h3 class="text-xl font-bold mb-4 text-left">Response</h3>
       <div class="w-full h-5/6 rounded-md overflow-scroll">
