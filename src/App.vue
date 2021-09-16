@@ -1,15 +1,27 @@
 <template>
-  <div id="app" class="h-full static flex flex-col">
+  <div id="app" class="h-full static flex flex-col dark:bg-black">
     <div class="w-full h-2/5">
       <div class="flex flex-row justify-end font-bold text-md px-12 py-4">
-        <a class="mx-4" :href="npmLink">npm</a>
-        <a class="mx-4" :href="githubLink">Github</a>
+        <a class="mx-4 dark:text-white" :href="githubLink">Github</a>
+        <a class="mx-4 dark:text-white" :href="npmLink">npm</a>
+        <span class="cursor-pointer dark:text-white" @click="modeChange">
+          <sun-icon v-if="darkMode" size="1.5x" class="custom-class"></sun-icon>
+          <moon-icon
+            v-if="!darkMode"
+            size="1.5x"
+            class="custom-class"
+          ></moon-icon>
+        </span>
       </div>
-      <h1 class="mt-32 text-center text-9xl font-bold leading-7 text-gray-900">
+      <h1
+        class="mt-32 text-center text-9xl font-bold leading-7 text-gray-900 dark:text-white"
+      >
         Vue Auth Social
       </h1>
     </div>
-    <div class="flex justify-evenly h-1/5 py-16 px-14 text-center">
+    <div
+      class="flex justify-evenly h-1/5 py-16 px-14 text-center dark:text-white"
+    >
       <div class="w-1/4">
         <GoogleAuth :clientId="googleClientId" @on-submit="handleResponse">
           <h3 class="text-3xl font-bold mb-4">Google</h3>
@@ -37,9 +49,11 @@
         </Auth>
       </div>
     </div>
-    <div class="w-full h-2/5 px-40 py-4">
-      <h3 class="text-3xl font-bold mb-4 text-center">Response</h3>
-      <div class="bg-gray-100 w-full h-5/6 rounded-md overflow-scroll">
+    <div
+      class="bg-gray-100 h-2/5 my-4 dark:bg-gray-700 dark:text-white px-4 py-4"
+    >
+      <h3 class="text-xl font-bold mb-4 text-left">Response</h3>
+      <div class="w-full h-5/6 rounded-md overflow-scroll">
         <pre>{{ response }}</pre>
       </div>
     </div>
@@ -51,15 +65,19 @@ import { defineComponent, ref } from 'vue';
 import Auth from '@/components/Auth.vue';
 import FacebookAuth from '@/components/FacebookAuth.vue';
 import GoogleAuth from '@/components/GoogleAuth.vue';
+import { MoonIcon, SunIcon } from '@zhuowenli/vue-feather-icons';
 
 export default defineComponent({
   name: 'App',
   components: {
     Auth,
     FacebookAuth,
-    GoogleAuth
+    GoogleAuth,
+    MoonIcon,
+    SunIcon
   },
   setup() {
+    const darkMode = ref(false);
     const authRef: any = ref(null);
     const response: any = ref(null);
     const githubLink = 'https://github.com/xtiannyeto/vue-auth-social';
@@ -77,6 +95,16 @@ export default defineComponent({
       response.value = JSON.stringify(value, null, 4);
       closeAuth();
     }
+
+    function modeChange(): void {
+      darkMode.value = !darkMode.value;
+      if (darkMode.value) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
     return {
       authRef,
       response,
@@ -85,7 +113,9 @@ export default defineComponent({
       googleClientId,
       handleResponse,
       githubLink,
-      npmLink
+      npmLink,
+      darkMode,
+      modeChange
     };
   }
 });
