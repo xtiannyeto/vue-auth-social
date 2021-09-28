@@ -14,7 +14,7 @@
         </span>
       </div>
       <h1
-        class="mt-32 text-center text-9xl font-bold leading-7 text-gray-900 dark:text-white"
+        class="mt-32 text-center text-5xl font-bold leading-7 text-gray-900 dark:text-white"
       >
         Vue Auth Social
       </h1>
@@ -22,17 +22,17 @@
     <div
       class="flex justify-evenly h-1/5 py-16 px-14 text-center dark:text-white"
     >
-      <div class="w-1/4">
+      <div class="w-1/4 sm:w-1/5">
         <GoogleAuth :clientId="googleClientId" @on-submit="handleResponse">
-          <h3 class="text-3xl font-bold mb-4">Google</h3>
+          <h3 class="text-xl font-bold mb-4 hover:underline">Google</h3>
         </GoogleAuth>
       </div>
-      <div class="w-1/4">
+      <div class="w-1/4 sm:w-1/5">
         <FacebookAuth :appId="facebookAppId" @on-submit="handleResponse">
-          <h3 class="text-3xl font-bold mb-4">Facebook</h3>
+          <h3 class="text-xl font-bold mb-4 hover:underline">Facebook</h3>
         </FacebookAuth>
       </div>
-      <div class="w-1/4">
+      <div class="w-1/4 sm:w-1/5">
         <Auth
           ref="authRef"
           :logo="'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'"
@@ -45,12 +45,14 @@
           @on-signin="handleResponse"
           @on-signup="handleResponse"
         >
-          <h3 class="text-3xl font-bold mb-4">User / Password</h3>
+          <h3 class="text-xl font-bold mb-4 hover:underline">
+            User / Password
+          </h3>
         </Auth>
       </div>
     </div>
     <div
-      class="bg-gray-100 h-2/5 my-4 dark:bg-gray-700 dark:text-white px-4 py-4 mx-4"
+      class="bg-gray-100 h-2/5 my-4 dark:bg-gray-700 dark:text-white px-4 py-4 mx-4 rounded-md"
     >
       <h3 class="text-xl font-bold mb-4 text-left">Response</h3>
       <div class="w-full h-5/6 rounded-md overflow-scroll">
